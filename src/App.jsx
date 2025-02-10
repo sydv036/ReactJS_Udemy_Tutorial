@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import TodoNew from "./components/todo/TodoNew";
+import TodoData from "./components/todo/TodoData";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todoList, setTodoList] = useState([
+    { id: 1, name: "Udemy" },
+    { id: 2, name: "Youtube" },
+  ]);
+
+  const addNewTodo = (data) => {
+    const todoNew = {
+      id: randomID(),
+      name: data,
+    };
+    console.log(todoNew);
+
+    setTodoList([...todoList, todoNew]);
+  };
+  const randomID = () => {
+    return Math.floor(Math.random() * 1000000 + 899999);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main className="todo-container">
+        <h1>Todo List</h1>
+        <TodoNew addNewTodo={addNewTodo} />
+        <TodoData todoList={todoList} />
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
