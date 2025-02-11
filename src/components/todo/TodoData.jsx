@@ -21,3 +21,7 @@ const TodoData = (props) => {
   );
 };
 export default TodoData;
+
+// khi tham số được truyền vào là 1 mảng object
+// [{id:1,name:'helo'}] => bên phần nhận có thể khai báo như sau để nhận mảng object đó
+// const {id,name} = data truyền đến
