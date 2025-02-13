@@ -59,7 +59,7 @@ const Userform = (props) => {
           }}
           okText={"Create"}
           onCancel={() => {
-            closeModalRemoveData();
+            closeModalAndReset();
           }}
           maskClosable={false}
         >
