@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Space, Table, Tag } from "antd";
+import React, { useState } from "react";
+import { Table } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import UpdateUserModal from "./update.user.modal";
+import DetailUserModal from "./view.user.detail";
 const UserTable = (props) => {
-  const { dataUsers } = props;
+  const { dataUsers, LoadUser } = props;
+
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+
+  const [userUpdate, setUserUpdate] = useState(null);
+
+  const [isDetailModal, setIsDetailModal] = useState(false);
+
+  const [dataDetail, setDataDetail] = useState(null);
 
   const columns = [
     {
@@ -11,7 +20,15 @@ const UserTable = (props) => {
       dataIndex: "_id",
       render: (_, record) => (
         <>
-          <a> {record._id}</a>
+          <a
+            onClick={() => {
+              setIsDetailModal(true);
+              setDataDetail(record);
+            }}
+          >
+            {" "}
+            {record._id}
+          </a>
         </>
       ),
     },
@@ -37,7 +54,13 @@ const UserTable = (props) => {
               justifyContent: "space-between",
             }}
           >
-            <EditOutlined style={{ cursor: "pointer", color: "blue" }} />
+            <EditOutlined
+              style={{ cursor: "pointer", color: "blue" }}
+              onClick={() => {
+                setIsModalUpdateOpen(true);
+                setUserUpdate(record);
+              }}
+            />
             <DeleteOutlined style={{ cursor: "pointer", color: "red" }} />
           </div>
         </>
@@ -48,7 +71,19 @@ const UserTable = (props) => {
   return (
     <>
       <Table columns={columns} dataSource={dataUsers} rowKey={"_id"} />
-      <UpdateUserModal />
+      <UpdateUserModal
+        isModalUpdateOpen={isModalUpdateOpen}
+        setIsModalUpdateOpen={setIsModalUpdateOpen}
+        userUpdate={userUpdate}
+        setUserUpdate={setUserUpdate}
+        LoadUser={LoadUser}
+      />
+      <DetailUserModal
+        isDetailModal={isDetailModal}
+        setIsDetailModal={setIsDetailModal}
+        dataDetail={dataDetail}
+        setDataDetail={setDataDetail}
+      />
     </>
   );
 };
