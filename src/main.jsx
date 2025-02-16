@@ -7,6 +7,7 @@ import UserPage from "./pages/user.jsx";
 import BookPage from "./pages/book.jsx";
 import TodoPage from "./pages/todo.jsx";
 import ErrorPage from "./pages/error.jsx";
+import RegisterPage from "./pages/register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
