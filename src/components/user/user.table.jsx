@@ -6,7 +6,15 @@ import DetailUserModal from "./view.user.detail";
 import { deleteUserAPI } from "../../services/api.service";
 
 const UserTable = (props) => {
-  const { dataUsers, LoadUser } = props;
+  const {
+    dataUsers,
+    LoadUser,
+    currentPage,
+    pageSize,
+    totalPage,
+    setCurrentPage,
+    setPageSize,
+  } = props;
 
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
 
@@ -37,6 +45,12 @@ const UserTable = (props) => {
   };
 
   const columns = [
+    {
+      title: "STT",
+      render: (_, record, index) => {
+        return <>{index + 1 + (currentPage - 1) * pageSize}</>;
+      },
+    },
     {
       title: "ID",
       dataIndex: "_id",
@@ -102,9 +116,34 @@ const UserTable = (props) => {
     },
   ];
 
+  const onChange = async (pagination, filters, sorter, extra) => {
+    console.log("check", { pagination, filters, sorter, extra });
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
+
   return (
     <>
-      <Table columns={columns} dataSource={dataUsers} rowKey={"_id"} />
+      <Table
+        columns={columns}
+        dataSource={dataUsers}
+        rowKey={"_id"}
+        pagination={{
+          current: currentPage,
+          pageSize: pageSize,
+          showSizeChanger: true,
+          total: totalPage,
+          showTotal: (total, range) => {
+            return (
+              <div>
+                {" "}
+                {range[0]}-{range[1]} trên {total} rows
+              </div>
+            );
+          },
+        }}
+        onChange={onChange}
+      />
       <UpdateUserModal
         isModalUpdateOpen={isModalUpdateOpen}
         setIsModalUpdateOpen={setIsModalUpdateOpen}
