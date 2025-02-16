@@ -1,10 +1,27 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
+import { registerAPI } from "../services/api.service";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
-  const onFinish = (value) => {
-    console.log(value);
+  const onFinish = async (value) => {
+    const res = await registerAPI(value);
+    if (res.data) {
+      notification.success({
+        message: "Register",
+        description: "Registered Successfully!",
+        showProgress: true,
+      });
+      navigate("/login");
+    } else {
+      notification.error({
+        message: "Register",
+        description: JSON.stringify(res.message),
+        showProgress: true,
+      });
+    }
   };
 
   return (
@@ -30,7 +47,7 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input your Full Name!",
             },
           ]}
         >
@@ -42,11 +59,11 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input your Email!",
             },
           ]}
         >
-          <Input />
+          <Input type="email" />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -54,8 +71,13 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input your Password!",
             },
+            // {
+            //   pattern:
+            //     /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!#$%\-_=+<>])([a-zA-Z0-9!#$%\-_=+<>]+)$/,
+            //   message: `Password Pattern`,
+            // },
           ]}
         >
           <Input.Password />
@@ -66,7 +88,11 @@ const RegisterPage = () => {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: "Please input your Phone!",
+            },
+            {
+              pattern: new RegExp(/\d+/g),
+              message: "Must be a number!",
             },
           ]}
         >
@@ -80,6 +106,17 @@ const RegisterPage = () => {
             variant="solid"
           >
             Register
+          </Button>
+          <Button
+            onClick={() => {
+              const a = form.getFieldsValue();
+              form.setFieldsValue({
+                email: "sydvb@gmail.com",
+                fullName: "sydvb",
+              });
+            }}
+          >
+            Tét
           </Button>
         </div>
       </div>
