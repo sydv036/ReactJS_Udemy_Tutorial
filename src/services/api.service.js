@@ -57,6 +57,15 @@ const registerAPI = (dataUserObject) => {
   return axios.post(URL_BACKEND, dataUserObject);
 };
 
+const loginAPI = (username, password, delay) => {
+  const URL_BACKEND = "/api/v1/auth/login";
+  return axios.post(URL_BACKEND, {
+    username: username,
+    password: password,
+    delay: delay,
+  });
+};
+
 export {
   createUserAPI,
   updateUserAPI,
@@ -64,4 +73,5 @@ export {
   deleteUserAPI,
   uploadFileAPI,
   registerAPI,
+  loginAPI,
 };

@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Children, useState } from "react";
 // import "./header.css";
 import { Menu } from "antd";
 import {
   HomeOutlined,
+  LoginOutlined,
+  LogoutOutlined,
   ProductOutlined,
+  SettingOutlined,
   UsergroupAddOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 const Header = () => {
   const items = [
@@ -23,6 +27,23 @@ const Header = () => {
       label: <Link to={"/books"}>Book</Link>,
       key: "books",
       icon: <ProductOutlined />,
+    },
+    {
+      label: <Link to={"/login"}>Login</Link>,
+      key: "login",
+      icon: <LoginOutlined />,
+    },
+    {
+      label: "Wellcome bla bla",
+      key: "info",
+      icon: <SettingOutlined />,
+      children: [
+        { label: "Logout", icon: <LogoutOutlined /> },
+        {
+          label: "Profile",
+          icon: <UserOutlined />,
+        },
+      ],
     },
   ];
   const [current, setCurrent] = useState("");
