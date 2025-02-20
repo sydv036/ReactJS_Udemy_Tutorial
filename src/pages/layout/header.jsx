@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 // import "./header.css";
 import { Menu } from "antd";
@@ -12,8 +12,28 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../../components/context/auth.context";
+import { logoutAPI } from "../../services/api.service";
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const hanldeLogout = async () => {
+    const res = await logoutAPI();
+    if (res.data) {
+      localStorage.removeItem("access_token");
+      setUser({
+        email: "",
+        phone: "",
+        fullName: "",
+        role: "",
+        avatar: "",
+        id: "",
+      });
+    }
+    navigate("/login");
+  };
+
   const items = [
     {
       label: <Link to={"/"}>Home</Link>,
@@ -46,7 +66,10 @@ const Header = () => {
             key: "info",
             icon: <SettingOutlined />,
             children: [
-              { label: "Logout", icon: <LogoutOutlined /> },
+              {
+                label: <Link onClick={() => hanldeLogout()}>Logout</Link>,
+                icon: <LogoutOutlined />,
+              },
               {
                 label: "Profile",
                 icon: <UserOutlined />,
@@ -60,8 +83,6 @@ const Header = () => {
   const onClick = (e) => {
     setCurrent(e.key);
   };
-  console.log("check user:", user);
-
   return (
     <Menu
       onClick={onClick}

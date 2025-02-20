@@ -65,9 +65,14 @@ const loginAPI = (username, password, delay) => {
     delay: delay,
   });
 };
-const getAcountAuth = () => {
+const getAcountAuthAPI = () => {
   const URL_BACKEND = "/api/v1/auth/account";
   return axios.get(URL_BACKEND);
+};
+
+const logoutAPI = () => {
+  const URL_BACKEND = "/api/v1/auth/logout";
+  return axios.post(URL_BACKEND);
 };
 
 export {
@@ -78,5 +83,6 @@ export {
   uploadFileAPI,
   registerAPI,
   loginAPI,
-  getAcountAuth,
+  getAcountAuthAPI,
+  logoutAPI,
 };

@@ -9,6 +9,7 @@ import TodoPage from "./pages/todo.jsx";
 import ErrorPage from "./pages/error.jsx";
 import RegisterPage from "./pages/register.jsx";
 import AuthContextWapper from "./components/context/auth.context.jsx";
+import PrivateRouter from "./pages/private.router.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/books",
-        element: <BookPage />,
+        element: (
+          <PrivateRouter>
+            <BookPage />
+          </PrivateRouter>
+        ),
       },
     ],
   },
