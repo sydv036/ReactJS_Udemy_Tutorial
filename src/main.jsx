@@ -8,6 +8,7 @@ import BookPage from "./pages/book.jsx";
 import TodoPage from "./pages/todo.jsx";
 import ErrorPage from "./pages/error.jsx";
 import RegisterPage from "./pages/register.jsx";
+import AuthContextWapper from "./components/context/auth.context.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,9 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />
+  <AuthContextWapper>
+    <RouterProvider router={router} />
+  </AuthContextWapper>
+
   // </React.StrictMode>
 );
