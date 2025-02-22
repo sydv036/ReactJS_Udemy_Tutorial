@@ -117,7 +117,6 @@ const UserTable = (props) => {
   ];
 
   const onChange = async (pagination, filters, sorter, extra) => {
-    console.log("check", { pagination, filters, sorter, extra });
     setCurrentPage(pagination.current);
     setPageSize(pagination.pageSize);
   };

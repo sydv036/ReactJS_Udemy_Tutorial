@@ -43,7 +43,7 @@ const fetchAllUsers = (current, pageSize) => {
 const uploadFileAPI = (file, folder) => {
   const config = {
     headers: {
-      "upload-type": folder,
+      "upload-type": folder, //avatar or book
       "Content-Type": "multipart/form-data",
     },
   };

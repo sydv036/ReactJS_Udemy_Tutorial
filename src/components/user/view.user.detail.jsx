@@ -78,7 +78,7 @@ const DetailUserModal = (props) => {
           >
             <img
               style={{ width: "150px", height: "150px" }}
-              src={`${import.meta.env.VITE_BACKEND_URL}//images/avatar/${
+              src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${
                 dataDetail.avatar
               }`}
               alt=""
