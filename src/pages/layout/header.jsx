@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 // import "./header.css";
 import { Menu } from "antd";
 import {
@@ -17,6 +17,17 @@ const Header = () => {
   const { user, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const [current, setCurrent] = useState("");
+
+  // useEffect(() => {
+  //   // const path = ["users", "books"];
+  //   // const check = path.find((item) => location.pathname);
+  //   // console.log(check);
+  //   setCurrent(location.pathname);
+  // }, [location]);
 
   const hanldeLogout = async () => {
     const res = await logoutAPI();
@@ -79,7 +90,7 @@ const Header = () => {
         ]
       : []),
   ];
-  const [current, setCurrent] = useState("");
+
   const onClick = (e) => {
     setCurrent(e.key);
   };

@@ -29,7 +29,7 @@ const BookTable = (props) => {
     const res = await deleteBookAPI(id);
     if (res.statusCode == 200 && res.data && res.data.deletedCount > 0) {
       message.success("Book deleted successfully!");
-      await loadDataTableBook();
+      setCurrentPage(1);
     } else {
       message.error("Book delete failed!");
     }

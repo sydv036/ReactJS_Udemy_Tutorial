@@ -5,14 +5,14 @@ import { fetchBookWithPage } from "../services/api.book.service";
 import { delay } from "../components/common/common";
 
 const BookPage = () => {
-  const [currentPage, setCurrentPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(3);
   const [total, setTotal] = useState(null);
   const [dataBooks, setDataBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     loadDataTableBook();
-  }, []);
+  }, [currentPage, pageSize]);
 
   const loadDataTableBook = async () => {
     setIsLoading(true);

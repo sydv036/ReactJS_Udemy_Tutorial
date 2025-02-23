@@ -10,6 +10,7 @@ import ErrorPage from "./pages/error.jsx";
 import RegisterPage from "./pages/register.jsx";
 import AuthContextWapper from "./components/context/auth.context.jsx";
 import PrivateRouter from "./pages/private.router.jsx";
+import "nprogress/nprogress.css";
 
 const router = createBrowserRouter([
   {
